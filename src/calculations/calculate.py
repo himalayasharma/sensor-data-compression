@@ -38,6 +38,7 @@ def main(base_dir):
 
     # -------------- Calculate compression ratios -----------------
     compression_ratio_dict = dict()
+    compression_ratio_dict['Original'] = 1
     for key, item in dr_data_dict.items():
         compression_ratio_dict[key] = get_compression_ratio(X_train, item[0])
     compression_ratio = pd.DataFrame.from_dict(compression_ratio_dict, orient='index', columns=['Compression Ratio'])
@@ -45,13 +46,21 @@ def main(base_dir):
 
     # -------------- Calculate space saving -----------------
     space_saving_dict = dict()
+    space_saving_dict['Original'] = 0
     for key, item in dr_data_dict.items():
         space_saving_dict[key] = get_space_saving(X_train, item[0])
     space_saving = pd.DataFrame.from_dict(space_saving_dict, orient='index', columns=['Space Saving'])
     statistics_summary_list.append(space_saving)
 
     # -------------- Print statistics summary -----------------
-    print(pd.concat(statistics_summary_list, axis=1))
+    logger.info('created statistics summary')
+    statistics_summary = pd.concat(statistics_summary_list, axis=1)
+    print(statistics_summary)
+
+    # -------------- Save statistics summary -----------------
+    with open(os.path.join(processed_data_dir, 'statistics_summary'), 'wb') as file_pi:
+        pickle.dump(statistics_summary, file_pi)
+    logger.info('saved statistics summary')
     
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
