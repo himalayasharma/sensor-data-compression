@@ -54,6 +54,32 @@ def get_isomap_data(X_train, X_test, y_train, y_test):
     mds = MDS(n_components=2, n_jobs=-1)
     return mds.fit_transform(X_train), mds.fit_transform(X_test)
 
+def get_backward_elimination_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.feature_selection import SequentialFeatureSelector
+    knn = KNeighborsClassifier(n_neighbors=3, n_jobs=-1)
+    sfs_backward = SequentialFeatureSelector(knn, n_features_to_select=2, direction='backward', n_jobs=-1)
+    sfs_backward.fit(X_train, y_train)
+    return sfs_backward.transform(X_train), sfs_backward.transform(X_test)
+
+def get_forward_selection_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.feature_selection import SequentialFeatureSelector
+    knn = KNeighborsClassifier(n_neighbors=3, n_jobs=-1)
+    sfs_forward = SequentialFeatureSelector(knn, n_features_to_select=2, direction='forward', n_jobs=-1)
+    sfs_forward.fit(X_train, y_train)
+    return sfs_forward.transform(X_train), sfs_forward.transform(X_test)
+
+def get_random_forest_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.ensemble import RandomForestClassifier
+    random_forest = RandomForestClassifier(n_estimators=10000, n_jobs=-1)
+    random_forest.fit(X_train, y_train)
+    indices = np.argsort(random_forest.feature_importances_)[-2:]
+    return X_train[:, indices], X_test[:, indices]
+
 def main(base_dir):
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
@@ -97,6 +123,20 @@ def main(base_dir):
     # iv) Isomap
     dr_data_dict['Isomap'] = get_isomap_data(X_train, X_test, y_train, y_test)
 
+    # -------------- FEATURE SELECTION -----------------
+    # Get PCA data with 10 features
+    from sklearn.decomposition import PCA
+    pca_feature_selection = PCA(n_components=10)
+    pca_feature_selection.fit(X_train)
+    X_train_pca = pca_feature_selection.transform(X_train)
+    X_test_pca = pca_feature_selection.transform(X_test)
+    
+    # i) Backward elimination
+    dr_data_dict['Backward Elimination'] = get_backward_elimination_data(X_train_pca, X_test_pca, y_train, y_test)
+    # ii) Forward selection
+    dr_data_dict['Forward Selection'] = get_forward_selection_data(X_train_pca, X_test_pca, y_train, y_test)
+    # iii) Random forest
+    dr_data_dict['Random Forest'] = get_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
