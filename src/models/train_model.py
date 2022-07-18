@@ -1,6 +1,7 @@
 import os
 import logging
 import pickle
+from random import random
 import pandas as pd
 from pathlib import Path
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -15,6 +16,17 @@ def get_knn_accuracy(dr_data_dict, y_train, y_test):
         knn_acc_dict[key] = knn.score(item[1], y_test)
         knn_acc = pd.DataFrame.from_dict(knn_acc_dict, orient='index', columns=['KNN(n_neighbors=7) accuracy'])
     return knn_acc
+
+def get_decision_tree_accuracy(dr_data_dict, y_train, y_test):
+
+    from sklearn.tree import DecisionTreeClassifier
+    decision_tree_acc_dict = dict()
+    for key, item in dr_data_dict.items():
+        decision_tree = DecisionTreeClassifier(random_state=42)
+        decision_tree.fit(item[0], y_train)
+        decision_tree_acc_dict[key] = decision_tree.score(item[1], y_test)
+        decision_tree_acc = pd.DataFrame.from_dict(decision_tree_acc_dict, orient='index', columns=['Decision tree accuracy'])
+    return decision_tree_acc
 
 def main(base_dir):
 
@@ -51,6 +63,11 @@ def main(base_dir):
     knn_acc = get_knn_accuracy(dr_data_dict, y_train, y_test)
     statistics_summary = pd.concat([statistics_summary, knn_acc], axis=1)
     logger.info('added knn accuracy to statistics summary')
+
+   # -------------- Add Decision tree accuracy ----------------- 
+    decision_tree_acc = get_decision_tree_accuracy(dr_data_dict, y_train, y_test)
+    statistics_summary = pd.concat([statistics_summary, decision_tree_acc], axis=1)
+    logger.info('added decision tree accuracy to statistics summary')
 
     print(statistics_summary)
 
