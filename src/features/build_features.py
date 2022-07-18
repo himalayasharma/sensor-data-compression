@@ -150,7 +150,7 @@ def main(base_dir):
     # -------------- Save data dictionary -----------------
     with open(os.path.join(processed_data_dir, 'dr_data_dict'), 'wb') as file_pi:
         pickle.dump(dr_data_dict, file_pi)
-    logger.info('saved dictionary containing DR data')
+    logger.info('saved dictionary containing data whose dimensions have been reduced')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
