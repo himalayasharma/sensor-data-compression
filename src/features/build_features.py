@@ -29,6 +29,31 @@ def get_truncated_svd_data(X_train, X_test, y_train, y_test):
     truncated_svd.fit(X_train)
     return truncated_svd.transform(X_train), truncated_svd.transform(X_test)
 
+def get_kernel_pca_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.decomposition import KernelPCA
+    kernel_pca = KernelPCA(n_components=2, n_jobs=-1)
+    kernel_pca.fit(X_train)
+    return kernel_pca.transform(X_train), kernel_pca.transform(X_test)
+
+def get_tsne_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.manifold import TSNE
+    tsne = TSNE(n_components=2, n_jobs=-1)
+    return tsne.fit_transform(X_train), tsne.fit_transform(X_test)
+
+def get_mds_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.manifold import MDS
+    mds = MDS(n_components=2, n_jobs=-1)
+    return mds.fit_transform(X_train), mds.fit_transform(X_test) 
+
+def get_isomap_data(X_train, X_test, y_train, y_test):
+
+    from sklearn.manifold import MDS
+    mds = MDS(n_components=2, n_jobs=-1)
+    return mds.fit_transform(X_train), mds.fit_transform(X_test)
+
 def main(base_dir):
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
@@ -53,13 +78,24 @@ def main(base_dir):
     # -------------- Create dictionary to store DR data -----------------
     dr_data_dict = dict()
 
-    # -------------- Linear methods -----------------
+    # -------------- FEATURE EXTRACTION -----------------
+    # I. Linear methods
     # i) PCA
     dr_data_dict['PCA'] = get_pca_data(X_train, X_test, y_train, y_test)
     # ii) LDA
     dr_data_dict['LDA'] = get_lda_data(X_train, X_test, y_train, y_test)
     # iii) Truncated SVD
     dr_data_dict['Truncated SVD'] = get_truncated_svd_data(X_train, X_test, y_train, y_test)
+
+    # II. Non-linear methods
+    # i) Kernel PCA
+    dr_data_dict['Kernel PCA'] = get_kernel_pca_data(X_train, X_test, y_train, y_test)
+    # ii) t-SNE
+    dr_data_dict['tSNE'] = get_tsne_data(X_train, X_test, y_train, y_test)
+    # iii) MDS
+    dr_data_dict['MDS'] = get_mds_data(X_train, X_test, y_train, y_test)
+    # iv) Isomap
+    dr_data_dict['Isomap'] = get_isomap_data(X_train, X_test, y_train, y_test)
 
 
 if __name__ == '__main__':
