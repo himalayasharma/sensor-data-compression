@@ -39,7 +39,7 @@ def get_tsne_data(X_train, X_test, y_train, y_test):
 
     from sklearn.manifold import TSNE
     tsne = TSNE(n_components=2, n_jobs=-1)
-    return tsne.fit_transform(X_train), tsne.fit_transform(X_test)
+    return tsne.fit_transform(X_train).astype('float'), tsne.fit_transform(X_test).astype('float')
 
 def get_mds_data(X_train, X_test, y_train, y_test):
 
