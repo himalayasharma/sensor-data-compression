@@ -108,20 +108,27 @@ def main(base_dir):
     # I. Linear methods
     # i) PCA
     dr_data_dict['PCA'] = get_pca_data(X_train, X_test, y_train, y_test)
+    logger.info('generated pca data')
     # ii) LDA
     dr_data_dict['LDA'] = get_lda_data(X_train, X_test, y_train, y_test)
+    logger.info('generated lda data')
     # iii) Truncated SVD
     dr_data_dict['Truncated SVD'] = get_truncated_svd_data(X_train, X_test, y_train, y_test)
+    logger.info('generated truncated svd data')
 
     # II. Non-linear methods
     # i) Kernel PCA
     dr_data_dict['Kernel PCA'] = get_kernel_pca_data(X_train, X_test, y_train, y_test)
+    logger.info('generated kernel pca data')
     # ii) t-SNE
     dr_data_dict['tSNE'] = get_tsne_data(X_train, X_test, y_train, y_test)
+    logger.info('generated t-sne data')
     # iii) MDS
     dr_data_dict['MDS'] = get_mds_data(X_train, X_test, y_train, y_test)
+    logger.info('generated mds data')
     # iv) Isomap
     dr_data_dict['Isomap'] = get_isomap_data(X_train, X_test, y_train, y_test)
+    logger.info('generated isomap data')
 
     # -------------- FEATURE SELECTION -----------------
     # Get PCA data with 10 features
@@ -133,10 +140,13 @@ def main(base_dir):
     
     # i) Backward elimination
     dr_data_dict['Backward Elimination'] = get_backward_elimination_data(X_train_pca, X_test_pca, y_train, y_test)
+    logger.info('generated backward elimination data')
     # ii) Forward selection
     dr_data_dict['Forward Selection'] = get_forward_selection_data(X_train_pca, X_test_pca, y_train, y_test)
+    logger.info('generated forward selection data')
     # iii) Random forest
     dr_data_dict['Random Forest'] = get_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
+    logger.info('generated random forest data')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
