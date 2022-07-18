@@ -148,6 +148,11 @@ def main(base_dir):
     dr_data_dict['Random Forest'] = get_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated random forest data')
 
+    # -------------- Save data dictionary -----------------
+    with open(os.path.join(processed_data_dir, 'dr_data_dict'), 'wb') as file_pi:
+        pickle.dump(dr_data_dict, file_pi)
+    logger.info('saved dictionary containing DR data')
+
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
