@@ -24,7 +24,7 @@ def main(base_dir):
     # Specify path to load processed data
     processed_data_dir = os.path.join(base_dir, 'data/processed')
     # Load data dictionary
-    with open(os.path.join(processed_data_dir, 'dr_data_dict'), 'rb') as file_pi:
+    with open(os.path.join(processed_data_dir, 'dr_data_dict_modelling'), 'rb') as file_pi:
         dr_data_dict = pickle.load(file_pi)
     logger.info('loaded dictionary containing data whose dimensions have been reduced')
 
@@ -32,15 +32,27 @@ def main(base_dir):
     with open(os.path.join(processed_data_dir, 'X_train'), 'rb') as file_pi:
         X_train = pickle.load(file_pi)
 
+   # -------------- Load X_test -----------------
+    with open(os.path.join(processed_data_dir, 'X_test'), 'rb') as file_pi:
+        X_test = pickle.load(file_pi)
+
     # -------------- Create statistic summary dataframe -----------------
     statistics_summary_list = list()
     statistics_summary = pd.DataFrame()
+
+    # -------------- Add number of components -----------------
+    n_components_dict = dict()
+    n_components_dict['Original'] = 533
+    for key, item in dr_data_dict.items():
+        n_components_dict[key] = item[0]
+    n_components = pd.DataFrame.from_dict(n_components_dict, orient='index', columns=['No of dims'])
+    statistics_summary_list.append(n_components)
 
     # -------------- Calculate compression ratios -----------------
     compression_ratio_dict = dict()
     compression_ratio_dict['Original'] = 1
     for key, item in dr_data_dict.items():
-        compression_ratio_dict[key] = get_compression_ratio(X_train, item[0])
+        compression_ratio_dict[key] = get_compression_ratio(X_test, item[2])
     compression_ratio = pd.DataFrame.from_dict(compression_ratio_dict, orient='index', columns=['Compression Ratio'])
     statistics_summary_list.append(compression_ratio)
 
@@ -48,7 +60,7 @@ def main(base_dir):
     space_saving_dict = dict()
     space_saving_dict['Original'] = 0
     for key, item in dr_data_dict.items():
-        space_saving_dict[key] = get_space_saving(X_train, item[0])
+        space_saving_dict[key] = get_space_saving(X_test, item[2])
     space_saving = pd.DataFrame.from_dict(space_saving_dict, orient='index', columns=['Space Saving'])
     statistics_summary_list.append(space_saving)
 
