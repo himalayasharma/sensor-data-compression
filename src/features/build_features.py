@@ -232,9 +232,9 @@ def main(base_dir):
     dr_data_dict_modelling['LDA'] = get_lda_data(X_train, X_test, y_train, y_test)
     logger.info('generated lda data')
     # iii) Truncated SVD
-    dr_data_dict['Truncated SVD'] = get_2d_truncated_svd_data(X_train, X_test, y_train, y_test)
+    dr_data_dict['Trunc SVD'] = get_2d_truncated_svd_data(X_train, X_test, y_train, y_test)
     logger.info('generated 2d truncated svd data')
-    dr_data_dict_modelling['Truncated SVD'] = get_truncated_svd_data(X_train, X_test, y_train, y_test)
+    dr_data_dict_modelling['Trunc SVD'] = get_truncated_svd_data(X_train, X_test, y_train, y_test)
     logger.info('generated truncated svd data')
 
     # II. Non-linear methods
@@ -268,19 +268,19 @@ def main(base_dir):
     X_test_pca = pca_feature_selection.transform(X_test)
     
     # i) Backward elimination
-    dr_data_dict['Backward Elimination'] = get_2d_backward_elimination_data(X_train_pca, X_test_pca, y_train, y_test)
+    dr_data_dict['Back Elim'] = get_2d_backward_elimination_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated 2d backward elimination data')
-    dr_data_dict_modelling['Backward Elimination'] = get_backward_elimination_data(X_train_pca, X_test_pca, y_train, y_test)
+    dr_data_dict_modelling['Back Elim'] = get_backward_elimination_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated backward elimination data')
     # ii) Forward selection
-    dr_data_dict['Forward Selection'] = get_2d_forward_selection_data(X_train_pca, X_test_pca, y_train, y_test)
+    dr_data_dict['Forward Sel'] = get_2d_forward_selection_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated 2d forward selection data')
-    dr_data_dict_modelling['Forward Selection'] = get_forward_selection_data(X_train_pca, X_test_pca, y_train, y_test)
+    dr_data_dict_modelling['Forward Sel'] = get_forward_selection_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated forward selection data')
     # iii) Random forest
-    dr_data_dict['Random Forest'] = get_2d_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
+    dr_data_dict['Rand For'] = get_2d_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated 2d random forest data')
-    dr_data_dict_modelling['Random Forest'] = get_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
+    dr_data_dict_modelling['Rand For'] = get_random_forest_data(X_train_pca, X_test_pca, y_train, y_test)
     logger.info('generated random forest data')
 
     # -------------- Save data dictionary -----------------'
