@@ -48,6 +48,14 @@ def main(base_dir):
     n_components = pd.DataFrame.from_dict(n_components_dict, orient='index', columns=['No of dims'])
     statistics_summary_list.append(n_components)
 
+    # -------------- Calculate compressed sizes -----------------
+    compressed_size_dict = dict()
+    compressed_size_dict['Original'] = get_arr_size(X_test)
+    for key, item in dr_data_dict.items():
+        compressed_size_dict[key] = get_arr_size(item[2])
+    compressed_size = pd.DataFrame.from_dict(compressed_size_dict, orient='index', columns=['Compressed Size'])
+    statistics_summary_list.append(compressed_size)
+
     # -------------- Calculate compression ratios -----------------
     compression_ratio_dict = dict()
     compression_ratio_dict['Original'] = 1
