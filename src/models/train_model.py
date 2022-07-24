@@ -17,7 +17,7 @@ def get_knn_accuracy(dr_data_dict, y_train, y_test):
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(item[1], y_train)
         knn_acc_dict[key] = knn.score(item[2], y_test)
-        knn_acc = pd.DataFrame.from_dict(knn_acc_dict, orient='index', columns=['KNN(n_neighbors=7) accuracy'])
+        knn_acc = pd.DataFrame.from_dict(knn_acc_dict, orient='index', columns=['KNN(n_neighbors=3) accuracy'])
     return knn_acc
 
 def get_decision_tree_accuracy(dr_data_dict, y_train, y_test):
@@ -101,7 +101,10 @@ def main(base_dir):
     statistics_summary = pd.concat([statistics_summary, svc_acc], axis=1)
     logger.info('added svc accuracy to statistics summary')
 
-    print(statistics_summary)
+    # -------------- Save statistics summary ----------------- 
+    with open(os.path.join(processed_data_dir, 'statistics_summary'), 'wb') as file_pi:
+        pickle.dump(statistics_summary, file_pi)
+    logger.info('saved updated statistics summary')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
