@@ -5,7 +5,7 @@
     <img src="readme-assets/analytics-3088958-1920.jpg" alt="Logo" width="240" height="240">
   </a>
 
-  <h1 align="center">Data Compression using Dimensionality Reduction</h1>
+  <h1 align="center">Data compression using dimensionality reduction</h1>
 </div>
 
 Project Organization
