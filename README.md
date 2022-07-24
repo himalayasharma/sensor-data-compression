@@ -8,6 +8,8 @@
   <h1 align="center">Data compression using dimensionality reduction</h1>
 </div>
 
+Comparitive analysis of dimensionality reduction technqiues for compression of real-world sensor data.
+
 Project Organization
 ------------
 
