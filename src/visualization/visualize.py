@@ -20,6 +20,14 @@ def main(base_dir):
     statistics_summary['DR Algos'] = statistics_summary.index
     print(statistics_summary)
 
+    # -------------- Load data dict summary ----------------- 
+    with open(os.path.join(processed_data_dir, 'dr_data_dict_modelling'), 'rb') as file_pi:
+        dr_data_dict_modelling = pickle.load(file_pi)
+
+    # -------------- Load y_test ----------------- 
+    with open(os.path.join(processed_data_dir, 'y_test'), 'rb') as file_pi:
+        y_test = pickle.load(file_pi)
+
     # -------------- Size comparison plot -----------------
     ax1 = statistics_summary.iloc[1:, :].plot.bar(x='DR Algos', y='Compressed Size',
     rot=22.5, figsize=(8,8))
@@ -51,7 +59,21 @@ def main(base_dir):
     ax[1].set_title("Space saving = 1 - (Compressed size/Uncompressed size)", fontsize=12)
     ax[1].set_ylabel("Dimensionality reduction algorithms", fontsize=12)
     plt.savefig('reports/figures/compression_ratio_barh.png')
-    plt.show()
+
+    # -------------- Dimensionality reduction 2-d plots -----------------
+    nrows, ncols = 2, 5
+    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=(25,15))
+    row = 0
+    col = 0
+    for key, item in dr_data_dict_modelling.items():
+        ax[row, col].scatter(item[2][:, 0], item[2][:, 1], c=y_test)
+        ax[row, col].set_title(key)
+        col += 1
+        if(col > 4):
+            col = 0
+            row = 1
+    plt.savefig('reports/figures/dimensionality_reduction_plots.png')
+    # plt.show()
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
