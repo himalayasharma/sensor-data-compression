@@ -7,7 +7,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROFILE = default
-PROJECT_NAME = activity-recognition
+PROJECT_NAME = data-compression-using-dimensionality-reduction
 PYTHON_INTERPRETER = python3
 
 ifeq (,$(shell which conda))
@@ -25,9 +25,25 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
-## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+## Download and process sensor data
+data:
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+
+## Generate data after dimensionality reduction
+build_features:
+	$(PYTHON_INTERPRETER) src/features/build_features.py
+
+## Train and evaluate models
+train_and_evaluate:
+	$(PYTHON_INTERPRETER) src/models/train_and_evaluate_model.py
+
+## Calculate statistics
+calculate:
+	$(PYTHON_INTERPRETER) src/calculations/calculate.py
+
+## Generate plots
+plot:
+	$(PYTHON_INTERPRETER) src/visualization/visualize.py
 
 ## Delete all compiled Python files
 clean:
@@ -63,13 +79,9 @@ ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
 else
 	conda create --name $(PROJECT_NAME) python=2.7
 endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
 else
-	$(PYTHON_INTERPRETER) -m pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already installed.\nMake sure the following lines are in shell startup file\n\
-	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	$(PYTHON_INTERPRETER) -m venv $(PROJECT_NAME)
+	@echo ">>> New virtualenv created. Activate with:\nsource $(PROJECT_NAME)/bin/activate"
 endif
 
 ## Test python environment is setup correctly
@@ -79,8 +91,6 @@ test_environment:
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
-
-
 
 #################################################################################
 # Self Documenting Commands                                                     #
