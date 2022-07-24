@@ -50,5 +50,65 @@ Project Organization
         │
         └── visualization       <- Scripts to create exploratory and results oriented visualizations
             └── visualize.py
+
+Prerequisites
+------------
+Before you begin, ensure you have met the following requirements:
+* You have a `Linux/Mac/Windows` machine.
+* You have installed a `python` distribution.
+* You have installed `pip`.
+* You have installed `make`.
+
+Setup
+------------
+1. Clone the repo
+	```
+	git clone https://github.com/himalayasharma/data-compression-using-dimensionality-reduction.git
+	```
+2. Create virtual environment.
+	```make
+	make create_environment
+	```
+3. Activate virtual environment.
+4. Download and install all required packages.
+	```make
+	make requirements
+	```
+5. Download and process physiological sensor dataset.
+	```make
+	make data
+	```
+6. Build new set of features after dimensionality reduction.
+	```make
+	make build_features
+	```
+7. Calculate required statistics (compression ratio, space saving etc).
+	```make
+	make calculate
+	```
+8. Train and evaluate models.
+	```make
+	make train_and_evaluate
+	```
+9. Generate plots.
+	```make
+	make plot
+	```
+   
+Contributing
+------------
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated. If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star! Thanks again!
+
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to the original branch: `git push origin <project_name>/<location>`
+5. Create the pull request.
+
+Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+License
+------------
+Distributed under the MIT License. See `LICENSE.txt` for more information.
     
 --------
