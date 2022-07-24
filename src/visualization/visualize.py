@@ -48,32 +48,41 @@ def main(base_dir):
     plt.savefig('reports/figures/no_of_features_bar.png')
 
     # -------------- Compression ratio & Space saving plot -----------------
-    fig, ax = plt.subplots(2, 1, figsize=(10,8))
-    statistics_summary.iloc[1:, :].plot.barh(x='DR Algos', y='Compression Ratio', rot=22.5, ax=ax[0], color='orange')
-    ax[0].bar_label(ax[0].containers[0])
-    ax[0].get_legend().remove()
-    ax[0].set_title("Compression ratio = Uncompressed size/Compressed size", fontsize=12)
-    ax[0].set_ylabel("Dimensionality reduction algorithms", fontsize=12)
-    statistics_summary.iloc[1:, :].plot.barh(x='DR Algos', y='Space Saving', rot=22.5, ax=ax[1], color='green')
-    ax[1].get_legend().remove()
-    ax[1].set_title("Space saving = 1 - (Compressed size/Uncompressed size)", fontsize=12)
-    ax[1].set_ylabel("Dimensionality reduction algorithms", fontsize=12)
+    fig, ax3 = plt.subplots(2, 1, figsize=(10,8))
+    statistics_summary.iloc[1:, :].plot.barh(x='DR Algos', y='Compression Ratio', rot=22.5, ax=ax3[0], color='orange')
+    ax3[0].bar_label(ax3[0].containers[0])
+    ax3[0].get_legend().remove()
+    ax3[0].set_title("Compression ratio = Uncompressed size/Compressed size", fontsize=12)
+    ax3[0].set_ylabel("Dimensionality reduction algorithms", fontsize=12)
+    statistics_summary.iloc[1:, :].plot.barh(x='DR Algos', y='Space Saving', rot=22.5, ax=ax3[1], color='green')
+    ax3[1].get_legend().remove()
+    ax3[1].set_title("Space saving = 1 - (Compressed size/Uncompressed size)", fontsize=12)
+    ax3[1].set_ylabel("Dimensionality reduction algorithms", fontsize=12)
     plt.savefig('reports/figures/compression_ratio_barh.png')
 
     # -------------- Dimensionality reduction 2-d plots -----------------
     nrows, ncols = 2, 5
-    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=(20,10))
+    fig, ax4 = plt.subplots(nrows=nrows, ncols=ncols, figsize=(20,10))
     row = 0
     col = 0
     for key, item in dr_data_dict_modelling.items():
-        ax[row, col].scatter(item[2][:, 0], item[2][:, 1], c=y_test)
-        ax[row, col].set_title(key)
+        ax4[row, col].scatter(item[2][:, 0], item[2][:, 1], c=y_test)
+        ax4[row, col].set_title(key)
         col += 1
         if(col > 4):
             col = 0
             row = 1
     plt.savefig('reports/figures/dimensionality_reduction_plots.png')
     #plt.show()
+
+    # -------------- Model accuracy plots -----------------
+    print(statistics_summary.columns)
+    ax5 = statistics_summary.iloc[1:, :].plot.bar(x='DR Algos', y=['KNN(n_neighbors=3) accuracy', 'Decision tree accuracy', 'Random forest accuracy', 'SVC accuracy'],
+    rot=22.5, figsize=(8,8))
+    ax5.set_title("Multi-class classification accuracy", fontsize=20)
+    ax5.set_xlabel("Dimensionality reduction algorithms", fontsize=15)
+    ax5.set_ylabel("Accuracy", fontsize=15)
+    plt.savefig('reports/figures/model_accuracy_plots.png')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
