@@ -62,7 +62,7 @@ def main(base_dir):
 
     # -------------- Dimensionality reduction 2-d plots -----------------
     nrows, ncols = 2, 5
-    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=(25,15))
+    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=(20,10))
     row = 0
     col = 0
     for key, item in dr_data_dict_modelling.items():
@@ -73,7 +73,7 @@ def main(base_dir):
             col = 0
             row = 1
     plt.savefig('reports/figures/dimensionality_reduction_plots.png')
-    # plt.show()
+    #plt.show()
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
