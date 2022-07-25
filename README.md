@@ -111,4 +111,17 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 License
 ------------
 Distributed under the MIT License. See `LICENSE` for more information.
+
+Ackowledgements
+------------
+* [Rukshan Pramodhita](https://rukshanpramoditha.medium.com/)
+* [Inma Mohino-Herranz](https://pubmed.ncbi.nlm.nih.gov/?term=Mohino-Herranz%20I%5BAuthor%5D)
+* [Roberto Gil-Pita](https://pubmed.ncbi.nlm.nih.gov/?term=Gil-Pita%20R%5BAuthor%5D)
+* [Manuel Rosa-Zurera](https://pubmed.ncbi.nlm.nih.gov/?term=Rosa-Zurera%20M%5BAuthor%5D)
+* [Fernando Seoane](https://pubmed.ncbi.nlm.nih.gov/?term=Seoane%20F%5BAuthor%5D)
+
+References
+------------
+* Mohino-Herranz I, Gil-Pita R, Rosa-Zurera M, Seoane F. Activity Recognition Using Wearable Physiological Measurements: Selection of Features from a Comprehensive Literature Study. Sensors (Basel). 2019 Dec 13;19(24):0. doi: 10.3390/s19245524. PMID: 31847261; PMCID: PMC6960825.
+* Compression ratio. (2022, June 2). In Wikipedia. https://en.wikipedia.org/wiki/Compression_ratio
 --------
