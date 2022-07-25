@@ -31,10 +31,12 @@ def main(base_dir):
     # -------------- Load X_train -----------------
     with open(os.path.join(processed_data_dir, 'X_train'), 'rb') as file_pi:
         X_train = pickle.load(file_pi)
+    logger.info('loaded X_train')
 
    # -------------- Load X_test -----------------
     with open(os.path.join(processed_data_dir, 'X_test'), 'rb') as file_pi:
         X_test = pickle.load(file_pi)
+    logger.info('loaded X_test')
 
     # -------------- Create statistic summary dataframe -----------------
     statistics_summary_list = list()
@@ -55,6 +57,7 @@ def main(base_dir):
         compressed_size_dict[key] = get_arr_size(item[2])
     compressed_size = pd.DataFrame.from_dict(compressed_size_dict, orient='index', columns=['Compressed Size'])
     statistics_summary_list.append(compressed_size)
+    logger.info('calculated size after compression')
 
     # -------------- Calculate compression ratios -----------------
     compression_ratio_dict = dict()
@@ -63,6 +66,7 @@ def main(base_dir):
         compression_ratio_dict[key] = get_compression_ratio(X_test, item[2])
     compression_ratio = pd.DataFrame.from_dict(compression_ratio_dict, orient='index', columns=['Compression Ratio'])
     statistics_summary_list.append(compression_ratio)
+    logger.info('calculated compression ratio')
 
     # -------------- Calculate space saving -----------------
     space_saving_dict = dict()
@@ -71,11 +75,11 @@ def main(base_dir):
         space_saving_dict[key] = get_space_saving(X_test, item[2])
     space_saving = pd.DataFrame.from_dict(space_saving_dict, orient='index', columns=['Space Saving'])
     statistics_summary_list.append(space_saving)
+    logger.info('calculated space saving')
 
-    # -------------- Print statistics summary -----------------
-    logger.info('created statistics summary')
+    # -------------- Create statistics summary dataframe -----------------
     statistics_summary = pd.concat(statistics_summary_list, axis=1)
-    print(statistics_summary)
+    logger.info('created statistics summary')
 
     # -------------- Save statistics summary -----------------
     with open(os.path.join(processed_data_dir, 'statistics_summary'), 'wb') as file_pi:
