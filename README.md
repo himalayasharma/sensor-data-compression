@@ -5,7 +5,7 @@
     <img src="readme-assets/analytics-3088958-1920.jpg" alt="Logo" width="240" height="240">
   </a>
 
-  <h1 align="center">Data compression using dimensionality reduction</h1>
+  <h1 align="center">Compression using Dimensionality Reduction</h1>
 </div>
 
 <!-- <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/data-compression-using-dimensionality-reduction?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/data-compression-using-dimensionality-reduction?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/data-compression-using-dimensionality-reduction"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/data-compression-using-dimensionality-reduction"> -->
