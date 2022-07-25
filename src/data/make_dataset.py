@@ -66,12 +66,14 @@ def main(base_dir):
     # Split data into train and test sets
     from sklearn.model_selection import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    logger.info('splitted data into train & test')
 
     # Normalize data
     from sklearn.preprocessing import MinMaxScaler
     scaler = MinMaxScaler()
     scaler.fit(X_train)
     X_train, X_test = scaler.transform(X_train), scaler.transform(X_test)
+    logger.info('normalized data')
 
     # -------------- Save preprocessed train & test sets -----------------
     processed_data_dir = os.path.join(base_dir, 'data/processed')
