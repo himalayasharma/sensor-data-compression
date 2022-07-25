@@ -18,6 +18,7 @@ def main(base_dir):
         statistics_summary = pickle.load(file_pi)
     logger.info('loaded statistics summary')
     statistics_summary['DR Algos'] = statistics_summary.index
+    print(statistics_summary)
 
     # -------------- Load data dictionary ----------------- 
     with open(os.path.join(processed_data_dir, 'dr_data_dict_modelling'), 'rb') as file_pi:
