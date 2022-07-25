@@ -61,36 +61,37 @@ Before you begin, ensure you have met the following requirements:
 
 Setup
 ------------
-1. Clone the repo
+1. Clone the repository.
 	```
 	git clone https://github.com/himalayasharma/data-compression-using-dimensionality-reduction.git
 	```
-2. Create virtual environment.
+2. Traverse into project directory.
+3. Create virtual environment.
 	```make
 	make create_environment
 	```
-3. Activate virtual environment.
-4. Download and install all required packages.
+4. Activate virtual environment.
+5. Download and install all required packages.
 	```make
 	make requirements
 	```
-5. Download and process physiological sensor dataset.
+6. Download and process physiological sensor dataset.
 	```make
 	make data
 	```
-6. Build new set of features after dimensionality reduction.
+7. Build new set of features after dimensionality reduction.
 	```make
 	make build_features
 	```
-7. Calculate required statistics (compression ratio, space saving etc).
+8. Calculate required statistics (compression ratio, space saving etc).
 	```make
 	make calculate
 	```
-8. Train and evaluate models.
+9. Train and evaluate models.
 	```make
 	make train_and_evaluate
 	```
-9. Generate plots.
+10. Generate plots.
 	```make
 	make plot
 	```
@@ -109,6 +110,5 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 
 License
 ------------
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-    
+Distributed under the MIT License. See `LICENSE` for more information.
 --------
