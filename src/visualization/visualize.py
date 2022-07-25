@@ -18,11 +18,11 @@ def main(base_dir):
         statistics_summary = pickle.load(file_pi)
     logger.info('loaded statistics summary')
     statistics_summary['DR Algos'] = statistics_summary.index
-    print(statistics_summary)
 
-    # -------------- Load data dict summary ----------------- 
+    # -------------- Load data dictionary ----------------- 
     with open(os.path.join(processed_data_dir, 'dr_data_dict_modelling'), 'rb') as file_pi:
         dr_data_dict_modelling = pickle.load(file_pi)
+    logger.info('loaded data dictionary')
 
     # -------------- Load y_test ----------------- 
     with open(os.path.join(processed_data_dir, 'y_test'), 'rb') as file_pi:
@@ -37,6 +37,7 @@ def main(base_dir):
     ax1.set_xlabel("Dimensionality reduction algorithms", fontsize=15)
     ax1.set_ylabel("Compressed size (KiB)", fontsize=15)
     plt.savefig('reports/figures/compressed_size_bar.png')
+    logger.info('saved plot showing comparison of sizes') 
 
     # -------------- No of reduced dimensions plot -----------------
     ax2 = statistics_summary.iloc[1:, :].plot.bar(x='DR Algos', y='No of dims',
@@ -46,6 +47,7 @@ def main(base_dir):
     ax2.set_xlabel("Dimensionality reduction algorithms", fontsize=15)
     ax2.set_ylabel("No of features", fontsize=15)
     plt.savefig('reports/figures/no_of_features_bar.png')
+    logger.info('saved plot showing number of features after dimensionality reduction')
 
     # -------------- Compression ratio & Space saving plot -----------------
     fig, ax3 = plt.subplots(2, 1, figsize=(10,8))
@@ -59,6 +61,7 @@ def main(base_dir):
     ax3[1].set_title("Space saving = 1 - (Compressed size/Uncompressed size)", fontsize=12)
     ax3[1].set_ylabel("Dimensionality reduction algorithms", fontsize=12)
     plt.savefig('reports/figures/compression_ratio_barh.png')
+    logger.info('saved plot showing showing compression ratio & space saving')
 
     # -------------- Dimensionality reduction 2-d plots -----------------
     nrows, ncols = 2, 5
@@ -73,7 +76,7 @@ def main(base_dir):
             col = 0
             row = 1
     plt.savefig('reports/figures/dimensionality_reduction_plots.png')
-    #plt.show()
+    logger.info('saved plot showing showing data with 2 dimensions only')
 
     # -------------- Model accuracy plots -----------------
     print(statistics_summary.columns)
@@ -83,6 +86,7 @@ def main(base_dir):
     ax5.set_xlabel("Dimensionality reduction algorithms", fontsize=15)
     ax5.set_ylabel("Accuracy", fontsize=15)
     plt.savefig('reports/figures/model_accuracy_plots.png')
+    logger.info('saved plot showing showing model accuracies')
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
