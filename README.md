@@ -2,16 +2,18 @@
 <br />
 <div align="center">
   <a>
-    <img src="readme-assets/analytics-3088958-1920.jpg" alt="Logo" width="240" height="240">
+    <img src="readme-assets/analytics-3088958-1920.jpg" alt="Logo" width="224" height="224">
   </a>
 
-  <h1 align="center">Sensor Data Compression</h1>
+  <h1 align="center"><img src="readme-assets/server-lineal.gif" width="35px"> Sensor Data Compression</h1>
 </div>
 
 <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/himalayasharma/compression-using-dimensionality-reduction?style=social"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/himalayasharma/compression-using-dimensionality-reduction?style=social"> <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/himalayasharma/compression-using-dimensionality-reduction"> <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/himalayasharma/compression-using-dimensionality-reduction">
 
 
-Comparitive analysis of dimensionality reduction techniques for compression of real-world sensor data.
+The project aimed to analyze wearable physiological sensor data through the use of 6 feature extraction techniques and 3 feature selection methods. The reduced data was then evaluated for its classification performance using 4 machine learning algorithms: KNN, Decision Trees, SVC, and Random Forest. The results showed impressive compression rates of up to 99.25% with a minor accuracy loss of only 6.7%. The project aimed to demonstrate the effectiveness of these techniques in achieving high data compression while preserving the accuracy of the analysis.
+
+Check out the video presentation [here](https://www.youtube.com/watch?v=hTAEp2EbO6U)!
 
 Project Organization
 ------------
